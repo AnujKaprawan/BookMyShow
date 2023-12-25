@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class RegularUserController {
-
     @Autowired
     RegularUserService regularUserService;
-
     @PostMapping("/signup")
-    public ResponseEntity signUp(@RequestBody RegularUserSignupDTO regularUserSignupDTO){
+    public ResponseEntity signUp(@RequestBody  RegularUserSignupDTO regularUserSignupDTO){
         ApplicationUser user = regularUserService.signup(regularUserSignupDTO);
         return new ResponseEntity(user, HttpStatus.CREATED);
     }
