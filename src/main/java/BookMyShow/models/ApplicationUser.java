@@ -29,3 +29,4 @@ public class ApplicationUser {
     @OneToMany(mappedBy = "user")
     List<Ticket> tickets;
 }
+
