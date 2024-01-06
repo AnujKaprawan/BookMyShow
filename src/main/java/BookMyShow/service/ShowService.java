@@ -18,12 +18,22 @@ public class ShowService {
     public List<Show> getShowsByMovieID(UUID movieId){
         return showRepository.getShowByMovieID(movieId);
     }
-
     public List<Show> getShowByHallId(UUID hallID){
         return showRepository.getShowByHallId(hallID);
     }
-
     public List<Show> getShowByHallIDAndMovieId(UUID hallId, UUID movieId){
         return showRepository.getShowByHallIDAndMovieId(hallId, movieId);
+    }
+
+    public Show getShowByShowId(UUID showID){
+        return showRepository.findById(showID).orElse(null);
+    }
+    /*
+        Decreases Available ticket count for a particular show.
+     */
+    public void updateAvailableTicketCount(Show show){
+        int updatedAvailableTicket = show.getAvailableTickets() - 1;
+        UUID showID = show.getId();
+        showRepository.updateAvailbleTicket(showID, updatedAvailableTicket);
     }
 }
