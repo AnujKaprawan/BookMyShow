@@ -15,9 +15,15 @@ public class ShowService {
     public void createShow(Show show){
         showRepository.save(show);
     }
-
     public List<Show> getShowsByMovieID(UUID movieId){
         return showRepository.getShowByMovieID(movieId);
     }
 
+    public List<Show> getShowByHallId(UUID hallID){
+        return showRepository.getShowByHallId(hallID);
+    }
+
+    public List<Show> getShowByHallIDAndMovieId(UUID hallId, UUID movieId){
+        return showRepository.getShowByHallIDAndMovieId(hallId, movieId);
+    }
 }

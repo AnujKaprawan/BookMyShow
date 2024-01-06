@@ -15,19 +15,19 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/show")
 public class ShowController {
-
     @Autowired
     ShowService showService;
-
     @GetMapping("/search")
-    public ResponseEntity searchShowByMovieId(@RequestParam(required = false) UUID movieId, @RequestParam(required = false) UUID hallId){
+    public ResponseEntity searchShowByMovieId(@RequestParam(required = false) UUID movieId,  @RequestParam(required = false) UUID hallId){
 
         if(movieId != null && hallId != null){
             // search for both movieId and hallId
-            return new ResponseEntity("Please pass atleast one param", HttpStatus.OK);
+            List<Show> shows = showService.getShowByHallIDAndMovieId(hallId, movieId);
+            return new ResponseEntity(shows, HttpStatus.OK);
         }else if(movieId == null && hallId != null){
+            List<Show> shows = showService.getShowByHallId(hallId);
             // search for only halls
-            return new ResponseEntity("Please pass atleast one param", HttpStatus.OK);
+            return new ResponseEntity(shows, HttpStatus.OK);
         }else if(movieId != null && hallId == null){
             List<Show> shows = showService.getShowsByMovieID(movieId);
             return new ResponseEntity(shows, HttpStatus.OK);
@@ -35,5 +35,4 @@ public class ShowController {
             return new ResponseEntity("Please pass atleast one param", HttpStatus.OK);
         }
     }
-
 }
